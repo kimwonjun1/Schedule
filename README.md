@@ -100,7 +100,7 @@
 
 ---      
 ### ERD
-
+![앱 실행 화면](images/Schedule_ERD.png)
 
 ---
 ### 개발 환경
