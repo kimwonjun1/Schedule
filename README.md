@@ -90,13 +90,14 @@
 
 ---      
 ### API 명세서  
-| Aa기능          | Method     | URL                   | request    | response       | 상태코드
-|:----------------|:----------:|----------------------:|:----------:|:--------------:|:----------:|
-| 일정 생성        | POST       | /api/schedules       | 요청 body   | 등록 정보      | 201 CREATED
-| 전체 일정 조회   | GET        | /api//schedules      | 요청 param  | 다건 응답 정보 | 200 OK
-| 선택 일정 조회   | GET        | /api/schedules/{id}  | 요청 param  | 단건 응답 정보 | 200 OK
-| 일정 수정        | PATCH      | /api/schedules/{id}  | 요청 body   | 수정 정보      | 200 OK
-| 일정 삭제        | DELETE     | /api/schedules/{id}  | 요청 param  | -              | 200 OK
+| Aa기능          | Method     | URL                   | request    | response              | 상태코드
+|:----------------|:----------:|----------------------:|:----------:|:---------------------:|:----------:|
+| 일정 생성        | POST       | /api/schedules       | 요청 body   | 등록 정보             | 201 CREATED
+| 일정 전체 조회   | GET        | /api//schedules      | 요청 param  | 다건 응답 정보        | 200 OK
+| 일정 페이지 조회 | GET        | /api/schedules       | 요청 param  | 페이지 단위 응답 정보 | 200 OK
+| 일정 단건 조회   | GET        | /api/schedules/{id}  | 요청 param  | 단건 응답 정보        | 200 OK
+| 일정 수정        | PATCH      | /api/schedules/{id}  | 요청 body   | 수정 정보             | 200 OK
+| 일정 삭제        | DELETE     | /api/schedules/{id}  | 요청 param  | -                     | 200 OK
 
 ---      
 ### ERD
