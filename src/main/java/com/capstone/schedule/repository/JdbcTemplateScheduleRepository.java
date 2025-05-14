@@ -86,7 +86,7 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
     @Override
     public int updateWork(Long id, String work, String password) {
         return jdbcTemplate.update(
-                "UPDATE schedule SET work = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND password = ?",
+                "UPDATE schedule SET work = ?, modification_date = CURRENT_TIMESTAMP WHERE id = ? AND password = ?",
                 work, id, password
         );
     }
