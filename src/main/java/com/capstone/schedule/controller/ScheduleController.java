@@ -34,6 +34,13 @@ public class ScheduleController {
         return scheduleService.findAllSchedules(modificationDate, name, writerId); // modificationDate, name, writerId 각각에 해당하는 모든 schedule을 할당한 responseDto를 반환 (Dto -> json)
     }
 
+    // 일정 페이지 단위 조회 API
+    // Query Params를 통해 page, size를 받아 Service Layer에 getPagedSchdules 메서드에 전달
+    @GetMapping("/paged")
+    public List<ScheduleResponseDto> getPagedSchedules(@RequestParam int page, @RequestParam int size) {
+        return scheduleService.getPagedSchedules(page, size);
+    }
+
     // 일정 단건 조회 API (schedule의 id를 사용하여 조회)
     // URL Path를 통해 데이터를 받아 매개변수 id에 할당
     @GetMapping("/{id}")

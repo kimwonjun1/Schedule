@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ScheduleServiceImpl implements ScheduleService {
@@ -43,6 +44,23 @@ public class ScheduleServiceImpl implements ScheduleService {
             responseList.add(dto);
         }
 
+        return responseList; // 변환된 리스트 반환
+    }
+
+    // 일정 페이지 단위 조회 비즈니스 로직
+    @Override
+    public List<ScheduleResponseDto> getPagedSchedules(int page, int size) {
+        int offset = page * size;
+
+        List<Schedule> pagedSchedules = scheduleRepository.findPagedSchedules(offset, size);
+        List<ScheduleResponseDto> responseList = new ArrayList<>();
+
+        // Schedule 리스트를 ResponseDto 리스트로 변환
+        for (int i = 0; i < pagedSchedules.size(); i++) {
+            Schedule schedule = pagedSchedules.get(i);
+            ScheduleResponseDto dto = new ScheduleResponseDto(schedule);
+            responseList.add(dto);
+        }
         return responseList; // 변환된 리스트 반환
     }
 

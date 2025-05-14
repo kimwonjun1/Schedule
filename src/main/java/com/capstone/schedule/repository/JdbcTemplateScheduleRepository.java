@@ -72,6 +72,20 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
         return jdbcTemplate.query(sql, scheduleRowMapper(), params.toArray()); // 최종 쿼리 실행 및 결과 매핑
     }
 
+    // 일정 페이지 단위 조회 로직
+    @Override
+    public List<Schedule> findPagedSchedules(int offset, int limit) {
+        String sql = """
+        SELECT s.*, w.name AS writer_name 
+        FROM schedule s
+        JOIN writer w ON s.writer_id = w.id
+        ORDER BY s.id DESC
+        LIMIT ? OFFSET ? 
+    """; // LIMIT : 한 페이지에 표시할 최대 행 수 (size), OFFSET : 시작 행의 위치 (page * size)
+
+        return jdbcTemplate.query(sql, scheduleRowMapperV2(), limit, offset);
+    }
+
     // 일정 단건 조회 로직
     @Override
     public Schedule findScheduleByIdOrElseThrow(Long id) {
@@ -106,6 +120,18 @@ public class JdbcTemplateScheduleRepository implements ScheduleRepository {
                 rs.getTimestamp("creation_date") != null ? rs.getTimestamp("creation_date").toLocalDateTime() : null,
                 rs.getTimestamp("modification_date") != null ? rs.getTimestamp("modification_date").toLocalDateTime() : null,
                 rs.getLong("writer_id")
+        );
+    }
+
+    private RowMapper<Schedule> scheduleRowMapperV2() {
+        return (rs, rowNum) -> new Schedule(
+                rs.getLong("id"),
+                rs.getString("work"),
+                rs.getString("password"),
+                rs.getTimestamp("creation_date") != null ? rs.getTimestamp("creation_date").toLocalDateTime() : null,
+                rs.getTimestamp("modification_date") != null ? rs.getTimestamp("modification_date").toLocalDateTime() : null,
+                rs.getLong("writer_id"),
+                rs.getString("writer_name") // writer_name을 추가하여 Schedule에 매핑
         );
     }
 }

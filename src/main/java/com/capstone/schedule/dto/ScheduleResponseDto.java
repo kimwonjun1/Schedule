@@ -11,17 +11,17 @@ import java.time.LocalDateTime;
 public class ScheduleResponseDto {
     private Long id;
     private String work;
-    private String password;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
     private Long writerId;
+    private String writerName; // ← 추가
 
     public ScheduleResponseDto(Schedule schedule) {
         this.id = schedule.getId();
         this.work = schedule.getWork();
-        this.writerId = schedule.getWriterId();
-        this.password = schedule.getPassword();
         this.creationDate = schedule.getCreationDate();
         this.modificationDate = schedule.getModificationDate();
+        this.writerId = schedule.getWriterId();
+        this.writerName = schedule.getWriterName();
     }
 }

@@ -11,6 +11,8 @@ public interface ScheduleRepository {
 
     List<Schedule> findAllSchedules(String modificationDate, String name, Long writerId);
 
+    List<Schedule> findPagedSchedules(int offset, int limit);
+
     Schedule findScheduleByIdOrElseThrow(Long id);
 
     int updateWork(Long id, String work, String password);
