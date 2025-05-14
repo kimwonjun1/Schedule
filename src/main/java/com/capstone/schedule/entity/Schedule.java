@@ -1,6 +1,5 @@
 package com.capstone.schedule.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
